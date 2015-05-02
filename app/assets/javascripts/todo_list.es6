@@ -1,8 +1,8 @@
 class TodoList extends Cape.Component {
   init() {
-    this.items = [];
+    this.items = [ { name: 'Test', done: false } ];
     this.text = '';
-    this.modifying = false;
+    this.editingItem = null;
     this.refresh();
   }
 
@@ -12,7 +12,7 @@ class TodoList extends Cape.Component {
         m.li(m => this.renderItem(m, item));
       });
     });
-    if (this.modifying) this.renderUpdateForm(m);
+    if (this.editingItem) this.renderUpdateForm(m);
     else this.renderCreateForm(m);
   }
 
@@ -47,6 +47,24 @@ class TodoList extends Cape.Component {
 
   createItem() {
     this.items.push({ name: this.val('new.name'), done: false });
+    this.val('new.name', '');
+    this.refresh();
+  }
+
+  editItem(item) {
+    this.editingItem = item;
+    this.val('edit.name', item.name);
+    this.refresh();
+  }
+
+  updateItem() {
+    this.editingItem.name = this.val('edit.name');
+    this.reset();
+  }
+
+  reset() {
+    this.editingItem = null;
+    this.val('edit.name', '');
     this.val('new.name', '');
     this.refresh();
   }
