@@ -5,6 +5,7 @@
     "capejs": "1.0.0-beta.6",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "lodash": "~3.8.0"
   }
 }
