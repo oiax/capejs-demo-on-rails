@@ -1,0 +1,16 @@
+#todo-list {
+  span.modifying {
+    font-weight: bold;
+    color: #800;
+  }
+  span.button {
+    cursor: pointer;
+    background-color: #888;
+    color: #fff;
+    padding: 2px;
+    font-size: 60%;
+  }
+  button[disabled] {
+    color: gray;
+  }
+}
