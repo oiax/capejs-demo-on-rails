@@ -9,15 +9,15 @@ class TodoList extends Cape.Component {
 
   render(m) {
     m.ul(m => {
-      this.items.forEach(item => {
-        m.li(m => this.renderItem(m, item));
+      this.items.forEach((item, index) => {
+        m.li(m => this.renderItem(m, item, index));
       });
     });
     this.renderUpdateForm(m);
     this.renderCreateForm(m);
   }
 
-  renderItem(m, item) {
+  renderItem(m, item, index) {
     m.label({ class: { completed: item.done }}, m => {
       m.attr({ type: 'checkbox', checked: item.done });
       m.input({ onclick: e => this.ds.toggleItem(item) }).sp();
@@ -25,7 +25,15 @@ class TodoList extends Cape.Component {
       m.span(item.name)
     }).sp();
     m.span('UPDATE', { class: 'button', onclick: e => this.editItem(item) }).sp();
-    m.span('DELETE', { class: 'button', onclick: e => this.ds.deleteItem(item) });
+    m.span('DELETE', { class: 'button', onclick: e => this.ds.deleteItem(item) }).sp();
+
+    if (index === 0) m.class('disabled');
+    else m.attr({ onclick: e => this.ds.moveUpItem(item) })
+    m.span({ class: 'button' }, m => m.fa('arrow-circle-up')).sp()
+
+    if (index === this.items.length - 1) m.class('disabled');
+    else m.attr({ onclick: e => this.ds.moveDownItem(item) })
+    m.span({ class: 'button' }, m => m.fa('arrow-circle-down'))
   }
 
   renderCreateForm(m) {

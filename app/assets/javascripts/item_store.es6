@@ -48,6 +48,26 @@ class ItemStore extends Cape.DataStore {
     });
   }
 
+  moveUpItem(item) {
+    var self = this;
+    $.ajax({
+      type: 'PATCH',
+      url: '/api/items/' + item.id + '/move_up'
+    }).done(data => {
+      if (data === 'OK') self.refresh();
+    });
+  }
+
+  moveDownItem(item) {
+    var self = this;
+    $.ajax({
+      type: 'PATCH',
+      url: '/api/items/' + item.id + '/move_down'
+    }).done(data => {
+      if (data === 'OK') self.refresh();
+    });
+  }
+
   toggleItem(item) {
     var self = this;
     $.ajax({

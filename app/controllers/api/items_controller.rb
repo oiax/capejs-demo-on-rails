@@ -1,6 +1,6 @@
 class Api::ItemsController < ApplicationController
   def index
-    @items = Item.order(id: :desc)
+    @items = Item.order(sort_order: :asc)
   end
 
   def create
@@ -23,6 +23,18 @@ class Api::ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     item.destroy
+    render text: 'OK'
+  end
+
+  def move_up
+    item = Item.find(params[:id])
+    item.move_up
+    render text: 'OK'
+  end
+
+  def move_down
+    item = Item.find(params[:id])
+    item.move_down
     render text: 'OK'
   end
 
