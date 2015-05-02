@@ -13,8 +13,8 @@ class TodoList extends Cape.Component {
         m.li(m => this.renderItem(m, item));
       });
     });
-    if (this.editingItem) this.renderUpdateForm(m);
-    else this.renderCreateForm(m);
+    this.renderUpdateForm(m);
+    this.renderCreateForm(m);
   }
 
   renderItem(m, item) {
@@ -29,7 +29,7 @@ class TodoList extends Cape.Component {
   }
 
   renderCreateForm(m) {
-    m.formFor('new', m => {
+    m.formFor('new', { visible: !this.editingItem }, m => {
       m.textField('name', { onkeyup: e => this.refresh() }).sp();
       m.attr({ disabled: this.val('new.name').trim().length === 0 });
       m.attr({ onclick: e => this.createItem() })
@@ -38,7 +38,7 @@ class TodoList extends Cape.Component {
   }
 
   renderUpdateForm(m) {
-    m.formFor('edit', m => {
+    m.formFor('edit', { visible: this.editingItem }, m => {
       m.textField('name', { onkeyup: e => this.refresh() }).sp();
       m.attr({ disabled: this.val('edit.name').trim().length === 0 });
       m.button('Update', { onclick: e => this.updateItem() }).sp();
@@ -68,7 +68,6 @@ class TodoList extends Cape.Component {
   updateItem() {
     var item = this.editingItem;
     this.editingItem = null;
-    this.val('new.name', '');
     this.ds.updateItem(item, this.val('edit.name', ''));
   }
 

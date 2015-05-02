@@ -1,4 +1,8 @@
 #todo-list {
+  label.completed span {
+    color: #888;
+    text-decoration: line-through;
+  }
   span.modifying {
     font-weight: bold;
     color: #800;
