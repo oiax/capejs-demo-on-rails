@@ -29,12 +29,22 @@ $ bin/rake db:setup
 
 ## How to start and stop this demo application
 
-To start the application, run this command on your terminal:
+To start the application as a server, run this command on your terminal:
 
 ```
 $ bin/rails s
 ```
 
-Then, you can access it using a web browser.
+Then, you can use it by accessing `http://localhost:3000` with a web browser.
 
 Enter `Ctrl-C` to stop it.
+
+### Notes
+
+If you want to allow users to access this app from the computers other than yours,
+you should open the port `3000` of your computer and start the server
+with the following command:
+
+```
+$ bin/rails s -b 0.0.0.0
+```
