@@ -2,7 +2,7 @@
   "name": "capejs-demo-on-rails",
   "version": "0.0.1",
   "dependencies": {
-    "capejs": "1.0.0-beta.6",
+    "capejs": "1.0.0-rc.2",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
     "jquery": "~2.1.4",
