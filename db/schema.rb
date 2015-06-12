@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502030611) do
+ActiveRecord::Schema.define(version: 20150612075725) do
 
-  create_table "items", force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "name",                       null: false
     t.boolean  "done",       default: false, null: false
     t.integer  "sort_order",                 null: false

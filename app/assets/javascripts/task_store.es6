@@ -1,79 +1,79 @@
-class ItemStore extends Cape.DataStore {
+class TaskStore extends Cape.DataStore {
   constructor() {
     super();
-    this.items = [];
+    this.tasks = [];
   }
 
   refresh() {
     var self = this;
     $.ajax({
       type: 'GET',
-      url: '/api/items.json'
+      url: '/api/tasks.json'
     }).done(data => {
-      self.items.length = 0;
-      data.forEach(item => self.items.push(item));
+      self.tasks.length = 0;
+      data.forEach(task => self.tasks.push(task));
       self.propagate();
     });
   }
 
-  createItem(name) {
+  createTask(name) {
     var self = this;
     $.ajax({
       type: 'POST',
-      url: '/api/items',
-      data: { item: { name: name } }
+      url: '/api/tasks',
+      data: { task: { name: name } }
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  updateItem(item, name) {
+  updateTask(task, name) {
     var self = this;
     $.ajax({
       type: 'PATCH',
-      url: '/api/items/' + item.id,
-      data: { item: { name: name } }
+      url: '/api/tasks/' + task.id,
+      data: { task: { name: name } }
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  deleteItem(item) {
+  deleteTask(task) {
     var self = this;
     $.ajax({
       type: 'DELETE',
-      url: '/api/items/' + item.id
+      url: '/api/tasks/' + task.id
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  moveUpItem(item) {
+  moveUpTask(task) {
     var self = this;
     $.ajax({
       type: 'PATCH',
-      url: '/api/items/' + item.id + '/move_up'
+      url: '/api/tasks/' + task.id + '/move_up'
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  moveDownItem(item) {
+  moveDownTask(task) {
     var self = this;
     $.ajax({
       type: 'PATCH',
-      url: '/api/items/' + item.id + '/move_down'
+      url: '/api/tasks/' + task.id + '/move_down'
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  toggleItem(item) {
+  toggleTask(task) {
     var self = this;
     $.ajax({
       type: 'PATCH',
-      url: '/api/items/' + item.id,
-      data: { item: { done: !item.done } }
+      url: '/api/tasks/' + task.id,
+      data: { task: { done: !task.done } }
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
