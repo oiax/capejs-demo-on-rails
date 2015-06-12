@@ -12,8 +12,8 @@ gem 'jbuilder', '~> 2.2'
 gem 'sdoc', group: :doc
 
 # ECMAScript 6
-gem 'sprockets', '~> 3.0.3'
-gem 'sprockets-es6', require: 'sprockets/es6'
+gem 'sprockets', '~> 3.2.0'
+gem 'sprockets-es6', '~> 0.6.0'
 
 group :development, :test do
   gem 'byebug'
