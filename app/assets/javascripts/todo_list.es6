@@ -22,7 +22,7 @@ class TodoList extends Cape.Component {
       m.attr({ type: 'checkbox', checked: task.done });
       m.input({ onclick: e => this.ds.toggleTask(task) }).sp();
       m.class({ modifying: task.modifying });
-      m.span(task.name)
+      m.span(task.title)
     }).sp();
     m.span('UPDATE', { class: 'button', onclick: e => this.editTask(task) }).sp();
     m.span('DELETE', { class: 'button', onclick: e => this.ds.deleteTask(task) }).sp();
@@ -38,8 +38,8 @@ class TodoList extends Cape.Component {
 
   renderCreateForm(m) {
     m.formFor('new', { visible: !this.editingTask }, m => {
-      m.textField('name', { onkeyup: e => this.refresh() }).sp();
-      m.attr({ disabled: this.val('new.name').trim().length === 0 });
+      m.textField('title', { onkeyup: e => this.refresh() }).sp();
+      m.attr({ disabled: this.val('new.title').trim().length === 0 });
       m.attr({ onclick: e => this.createTask() })
       m.button(`Add task #${ this.tasks.length + 1}`);
     });
@@ -47,15 +47,15 @@ class TodoList extends Cape.Component {
 
   renderUpdateForm(m) {
     m.formFor('edit', { visible: this.editingTask }, m => {
-      m.textField('name', { onkeyup: e => this.refresh() }).sp();
-      m.attr({ disabled: this.val('edit.name').trim().length === 0 });
+      m.textField('title', { onkeyup: e => this.refresh() }).sp();
+      m.attr({ disabled: this.val('edit.title').trim().length === 0 });
       m.button('Update', { onclick: e => this.updateTask() }).sp();
       m.button('Cancel', { onclick: e => this.reset() });
     });
   }
 
   createTask() {
-    this.ds.createTask(this.val('new.name', ''))
+    this.ds.createTask(this.val('new.title', ''))
   }
 
   editTask(task) {
@@ -68,7 +68,7 @@ class TodoList extends Cape.Component {
       task.modifying = true;
       this.reset();
       this.editingTask = task;
-      this.val('edit.name', task.name);
+      this.val('edit.title', task.title);
       this.refresh();
     }
   }
@@ -76,14 +76,14 @@ class TodoList extends Cape.Component {
   updateTask() {
     var task = this.editingTask;
     this.editingTask = null;
-    this.ds.updateTask(task, this.val('edit.name', ''));
+    this.ds.updateTask(task, this.val('edit.title', ''));
   }
 
   reset() {
     if (this.editingTask) this.editingTask.modifying = false;
     this.editingTask = null;
-    this.val('edit.name', '');
-    this.val('new.name', '');
+    this.val('edit.title', '');
+    this.val('new.title', '');
     this.refresh();
   }
 }

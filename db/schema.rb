@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150612075725) do
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "name",                       null: false
+    t.string   "title",                      null: false
     t.boolean  "done",       default: false, null: false
     t.integer  "sort_order",                 null: false
     t.datetime "created_at",                 null: false

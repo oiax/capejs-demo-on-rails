@@ -16,23 +16,23 @@ class TaskStore extends Cape.DataStore {
     });
   }
 
-  createTask(name) {
+  createTask(title) {
     var self = this;
     $.ajax({
       type: 'POST',
       url: '/api/tasks',
-      data: { task: { name: name } }
+      data: { task: { title: title } }
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
   }
 
-  updateTask(task, name) {
+  updateTask(task, title) {
     var self = this;
     $.ajax({
       type: 'PATCH',
       url: '/api/tasks/' + task.id,
-      data: { task: { name: name } }
+      data: { task: { title: title } }
     }).done(data => {
       if (data === 'OK') self.refresh();
     });
