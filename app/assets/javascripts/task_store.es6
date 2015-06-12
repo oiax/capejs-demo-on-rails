@@ -5,77 +5,70 @@ class TaskStore extends Cape.DataStore {
   }
 
   refresh() {
-    var self = this;
     $.ajax({
       type: 'GET',
-      url: '/api/tasks.json'
+      url: '/api/tasks'
     }).done(data => {
-      self.tasks.length = 0;
-      data.forEach(task => self.tasks.push(task));
-      self.propagate();
+      this.tasks.length = 0;
+      data.forEach(task => this.tasks.push(task));
+      this.propagate();
     });
   }
 
   createTask(title) {
-    var self = this;
     $.ajax({
       type: 'POST',
       url: '/api/tasks',
       data: { task: { title: title } }
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 
   updateTask(task, title) {
-    var self = this;
     $.ajax({
       type: 'PATCH',
       url: '/api/tasks/' + task.id,
       data: { task: { title: title } }
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 
   deleteTask(task) {
-    var self = this;
     $.ajax({
       type: 'DELETE',
       url: '/api/tasks/' + task.id
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 
   moveUpTask(task) {
-    var self = this;
     $.ajax({
       type: 'PATCH',
       url: '/api/tasks/' + task.id + '/move_up'
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 
   moveDownTask(task) {
-    var self = this;
     $.ajax({
       type: 'PATCH',
       url: '/api/tasks/' + task.id + '/move_down'
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 
   toggleTask(task) {
-    var self = this;
     $.ajax({
       type: 'PATCH',
       url: '/api/tasks/' + task.id,
       data: { task: { done: !task.done } }
     }).done(data => {
-      if (data === 'OK') self.refresh();
+      if (data === 'OK') this.refresh();
     });
   }
 }
