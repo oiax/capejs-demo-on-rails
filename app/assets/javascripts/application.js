@@ -3,5 +3,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require lodash
+//= require es6-promise
+//= require fetch
 //= require capejs
 //= require_tree .
