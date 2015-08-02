@@ -3,6 +3,12 @@
     color: #888;
     text-decoration: line-through;
   }
+  button[disabled] {
+    color: #888;
+  }
+  button + button {
+    margin-left: 4px;
+  }
   span.modifying {
     font-weight: bold;
     color: #800;
@@ -11,14 +17,12 @@
     cursor: pointer;
     background-color: #888;
     color: #fff;
+    margin-left: 4px;
     padding: 4px 8px;
     font-size: 60%;
   }
   span.button.disabled {
     cursor: not-allowed;
     background-color: #ccc;
-  }
-  button[disabled] {
-    color: gray;
   }
 }

@@ -2,14 +2,13 @@ class TodoList extends Cape.Component {
   init() {
     this.ds = new TaskStore();
     this.ds.attach(this);
-    this.tasks = this.ds.tasks;
     this.editingTask = null;
     this.ds.refresh();
   }
 
   render(m) {
     m.ul(m => {
-      this.tasks.forEach((task, index) => {
+      this.ds.tasks.forEach((task, index) => {
         m.li(m => this.renderTask(m, task, index));
       });
     });
@@ -23,39 +22,46 @@ class TodoList extends Cape.Component {
       m.input({ onclick: e => this.ds.toggleTask(task) }).sp();
       m.class({ modifying: task.modifying });
       m.span(task.title);
-    }).sp();
-    m.span('UPDATE', { class: 'button', onclick: e => this.editTask(task) }).sp();
-    m.span('DELETE', { class: 'button', onclick: e => this.ds.deleteTask(task) }).sp();
+    });
+    m.onclick(e => this.editTask(task));
+    m.span('Edit', { class: 'button' });
+    m.onclick(e => {
+      if (confirm('Are you sure you want to delete this task?'))
+        this.ds.destroyTask(task);
+    });
+    m.span('Delete', { class: 'button' });
 
     if (index === 0) m.class('disabled');
-    else m.attr({ onclick: e => this.ds.moveUpTask(task) });
+    else m.onclick(e => this.ds.moveUpTask(task));
     m.span({ class: 'button' }, m => m.fa('arrow-circle-up')).sp();
 
-    if (index === this.tasks.length - 1) m.class('disabled');
+    if (index === this.ds.tasks.length - 1) m.class('disabled');
     else m.attr({ onclick: e => this.ds.moveDownTask(task) });
     m.span({ class: 'button' }, m => m.fa('arrow-circle-down'));
   }
 
   renderCreateForm(m) {
-    m.formFor('new', m => {
-      m.textField('title', { onkeyup: e => this.refresh() }).sp();
-      m.attr({ disabled: this.val('new.title').trim().length === 0 });
+    m.formFor('new_task', m => {
+      m.onkeyup(e => this.refresh());
+      m.textField('title').sp();
+      m.attr({ disabled: this.val('new_task.title').trim().length === 0 });
       m.attr({ onclick: e => this.createTask() });
-      m.button(`Add task #${ this.tasks.length + 1}`);
+      m.button(`Add task #${ this.ds.tasks.length + 1}`);
     });
   }
 
   renderUpdateForm(m) {
-    m.formFor('edit', m => {
-      m.textField('title', { onkeyup: e => this.refresh() }).sp();
-      m.attr({ disabled: this.val('edit.title').trim().length === 0 });
-      m.button('Update', { onclick: e => this.updateTask() }).sp();
+    m.formFor('task', m => {
+      m.onkeyup(e => this.refresh());
+      m.textField('title').sp();
+      m.attr({ disabled: this.val('task.title').trim().length === 0 });
+      m.button('Update', { onclick: e => this.updateTask() });
       m.button('Cancel', { onclick: e => this.reset() });
     });
   }
 
   createTask() {
-    this.ds.createTask(this.val('new.title', ''))
+    this.ds.createTask(this.val('new_task.title', ''))
   }
 
   editTask(task) {
@@ -68,7 +74,7 @@ class TodoList extends Cape.Component {
       task.modifying = true;
       this.reset();
       this.editingTask = task;
-      this.val('edit.title', task.title);
+      this.val('task.title', task.title);
       this.refresh();
     }
   }
@@ -76,14 +82,13 @@ class TodoList extends Cape.Component {
   updateTask() {
     var task = this.editingTask;
     this.editingTask = null;
-    this.ds.updateTask(task, this.val('edit.title', ''));
+    this.ds.updateTask(task, this.val('task.title', ''));
   }
 
   reset() {
     if (this.editingTask) this.editingTask.modifying = false;
     this.editingTask = null;
-    this.val('edit.title', '');
-    // this.val('new.title', '');
+    this.val('task.title', '');
     this.refresh();
   }
 }

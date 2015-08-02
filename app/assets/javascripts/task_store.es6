@@ -35,7 +35,7 @@ class TaskStore extends Cape.DataStore {
     });
   }
 
-  deleteTask(task) {
+  destroyTask(task) {
     $.ajax({
       type: 'DELETE',
       url: '/api/tasks/' + task.id
