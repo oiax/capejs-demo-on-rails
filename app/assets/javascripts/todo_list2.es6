@@ -1,10 +1,10 @@
 class TodoList2 extends Cape.Component {
   init() {
     this.agent = TaskCollectionAgent
-      .create('tasks', { pathPrefix: '/api/v2/' })
-    this.agent.attach(this)
+      .create('tasks', { pathPrefix: '/api/v2/' });
+    this.agent.attach(this);
     this.editingTask = null;
-    this.agent.refresh()
+    this.agent.refresh();
   }
 
   render(m) {
