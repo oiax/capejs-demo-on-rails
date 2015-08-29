@@ -1,7 +1,6 @@
 class TodoList2 extends Cape.Component {
   init() {
-    this.agent = TaskCollectionAgent.create();
-    this.agent.attach(this);
+    this.agent = new TaskCollectionAgent(this);
     this.editingTask = null;
     this.agent.refresh();
   }
