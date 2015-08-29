@@ -7,7 +7,7 @@
     "fontawesome": "~4.3.0",
     "jquery": "~2.1.4",
     "lodash": "~3.8.0",
-    "es6-promise": "~2.2.0",
+    "es6-promise": "~3.0.0",
     "fetch": "~0.9.0"
   }
 }
