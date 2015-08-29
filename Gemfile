@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.4'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 2.7.0'
@@ -12,8 +12,8 @@ gem 'jbuilder', '~> 2.2'
 gem 'sdoc', group: :doc
 
 # ECMAScript 6
-gem 'sprockets', '~> 3.2.0'
-gem 'sprockets-es6', '~> 0.6.0'
+gem 'sprockets', '~> 3.3.0'
+gem 'sprockets-es6', '~> 0.7.0'
 
 group :development, :test do
   gem 'byebug'
