@@ -1,14 +1,21 @@
 class TodoList extends Cape.Component {
   init() {
-    this.ds = new TaskStore();
-    this.ds.attach(this);
+    this.agent = new TaskCollectionAgent(this);
     this.editingTask = null;
-    this.ds.refresh();
+    this.agent.refresh();
   }
 
   render(m) {
+    m.div({ class: 'row text-right'}, m => {
+      m.div({ class: 'col-xs-12'}, m => {
+        m.btn('Logout', {
+          class: 'btn btn-default btn-flat',
+          onclick: e => this.logout()
+        });
+      });
+    });
     m.ul(m => {
-      this.ds.tasks.forEach((task, index) => {
+      this.agent.objects.forEach((task, index) => {
         m.li(m => this.renderTask(m, task, index));
       });
     });
@@ -17,9 +24,10 @@ class TodoList extends Cape.Component {
   }
 
   renderTask(m, task, index) {
-    m.label({ class: { completed: task.done }}, m => {
-      m.attr({ type: 'checkbox', checked: task.done });
-      m.input({ onclick: e => this.ds.toggleTask(task) }).sp();
+    m.class({ completed: task.done });
+    m.label(m => {
+      m.onclick(e => this.agent.toggleTask(task));
+      m.input({ type: 'checkbox', checked: task.done }).sp();
       m.class({ modifying: task.modifying });
       m.span(task.title);
     });
@@ -27,16 +35,16 @@ class TodoList extends Cape.Component {
     m.span('Edit', { class: 'button' });
     m.onclick(e => {
       if (confirm('Are you sure you want to delete this task?'))
-        this.ds.destroyTask(task);
+        this.agent.destroy(task.id);
     });
     m.span('Delete', { class: 'button' });
 
     if (index === 0) m.class('disabled');
-    else m.onclick(e => this.ds.moveUpTask(task));
+    else m.onclick(e => this.agent.patch('move_up', task.id));
     m.span({ class: 'button' }, m => m.fa('arrow-circle-up')).sp();
 
-    if (index === this.ds.tasks.length - 1) m.class('disabled');
-    else m.attr({ onclick: e => this.ds.moveDownTask(task) });
+    if (index === this.agent.objects.length - 1) m.class('disabled');
+    else m.attr({ onclick: e => this.agent.patch('move_down', task.id) });
     m.span({ class: 'button' }, m => m.fa('arrow-circle-down'));
   }
 
@@ -44,9 +52,10 @@ class TodoList extends Cape.Component {
     m.formFor('new_task', m => {
       m.onkeyup(e => this.refresh());
       m.textField('title').sp();
-      m.attr({ disabled: this.val('new_task.title').trim().length === 0 });
-      m.attr({ onclick: e => this.createTask() });
-      m.button(`Add task #${ this.ds.tasks.length + 1}`);
+      m.attr({ disabled: this.val('new_task.title').trim() === '' });
+      m.onclick(e =>
+        this.agent.createTask(this.val('new_task.title', '')));
+      m.btn(`Add task #${ this.agent.objects.length + 1 }`);
     });
   }
 
@@ -54,19 +63,14 @@ class TodoList extends Cape.Component {
     m.formFor('task', m => {
       m.onkeyup(e => this.refresh());
       m.textField('title').sp();
-      m.attr({ disabled: this.val('task.title').trim().length === 0 });
-      m.button('Update', { onclick: e => this.updateTask() });
-      m.button('Cancel', { onclick: e => this.reset() });
+      m.attr({ disabled: this.val('task.title').trim() === '' });
+      m.btn('Update', { onclick: e => this.updateTask() });
+      m.btn('Cancel', { onclick: e => this.reset() });
     });
-  }
-
-  createTask() {
-    this.ds.createTask(this.val('new_task.title', ''))
   }
 
   editTask(task) {
     if (this.editingTask === task) {
-      task.modifying = false;
       this.reset();
     }
     else {
@@ -79,16 +83,32 @@ class TodoList extends Cape.Component {
     }
   }
 
-  updateTask() {
-    var task = this.editingTask;
-    this.editingTask = null;
-    this.ds.updateTask(task, this.val('task.title', ''));
-  }
-
   reset() {
     if (this.editingTask) this.editingTask.modifying = false;
     this.editingTask = null;
     this.val('task.title', '');
     this.refresh();
+  }
+
+  updateTask() {
+    var task = this.editingTask;
+    task.modifying = false;
+    this.editingTask = null;
+    this.agent.updateTask(task, this.val('task.title', ''));
+  }
+
+  logout() {
+    $.ajax({
+      url: '/api/session',
+      type: 'DELETE',
+      success: data => {
+        if (data === 'OK') {
+          window.router.redirectTo('login');
+        }
+        else {
+          self.refresh();
+        }
+      }
+    });
   }
 }

@@ -11,6 +11,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.2'
 gem 'sdoc', group: :doc
 
+gem 'mini_auth'
+
 # ECMAScript 6
 gem 'sprockets', '~> 3.3.0'
 gem 'sprockets-es6', '~> 0.7.0'
