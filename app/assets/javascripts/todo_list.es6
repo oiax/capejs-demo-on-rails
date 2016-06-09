@@ -6,6 +6,14 @@ class TodoList extends Cape.Component {
   }
 
   render(m) {
+    m.div({ class: 'row text-right'}, m => {
+      m.div({ class: 'col-xs-12'}, m => {
+        m.btn('Logout', {
+          class: 'btn btn-default btn-flat',
+          onclick: e => this.logout()
+        });
+      });
+    });
     m.ul(m => {
       this.agent.objects.forEach((task, index) => {
         m.li(m => this.renderTask(m, task, index));
@@ -87,5 +95,21 @@ class TodoList extends Cape.Component {
     task.modifying = false;
     this.editingTask = null;
     this.agent.updateTask(task, this.val('task.title', ''));
+  }
+
+  logout() {
+    var self = this;
+    $.ajax({
+      url: '/api/session',
+      type: 'DELETE',
+      success: data => {
+        if (data === 'OK') {
+          window.router.redirectTo('login');
+        }
+        else {
+          self.refresh();
+        }
+      }
+    });
   }
 }
