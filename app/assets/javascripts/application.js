@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require lodash
+//= require lodash/lodash
 //= require es6-promise
 //= require fetch
 //= require capejs
