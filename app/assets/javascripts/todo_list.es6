@@ -98,7 +98,6 @@ class TodoList extends Cape.Component {
   }
 
   logout() {
-    var self = this;
     $.ajax({
       url: '/api/session',
       type: 'DELETE',
