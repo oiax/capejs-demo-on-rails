@@ -14,7 +14,7 @@ In order to run this demo application, you need following softwares and librarie
 * [Git](http://git-scm.com/)
 * [Ruby](https://www.ruby-lang.org/en/) 2.0 or higher
 * [Bundler](http://bundler.io/)
-* [Node.js](https://nodejs.org/) or [io.js](https://iojs.org/en/index.html)
+* [Node.js](https://nodejs.org/) 5.5 or higher
 
 ## Installation of this demo application
 
@@ -23,6 +23,7 @@ $ git clone https://github.com/oiax/capejs-demo-on-rails.git
 $ cd capejs-demo-on-rails
 $ bundle
 $ npm install
+$ cp config/skel/database.yml config/
 $ bin/rake db:setup
 ```
 
