@@ -13,6 +13,10 @@ class Login extends Cape.Component {
             class: 'btn btn-primary btn-flat',
             onclick: e => this.login()
           });
+          m.btn('Cancel', {
+            class: 'btn btn-default btn-flat',
+            onclick: e => window.router.redirectTo('')
+          });
         });
       });
     });
@@ -21,7 +25,7 @@ class Login extends Cape.Component {
   login() {
     $.post('/api/session', this.formData(), data => {
       if (data === 'OK') {
-        window.router.redirectTo('');
+        window.router.redirectTo('todo_list');
       }
       else {
         this.refresh();

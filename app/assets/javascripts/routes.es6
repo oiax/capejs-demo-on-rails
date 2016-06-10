@@ -3,25 +3,31 @@ $(document).ready(() => {
 
   window.router = new Cape.Router()
   window.router.draw(m => {
-    m.root('todo_list')
+    m.root('welcome')
     m.page('login', 'login')
+    m.page('todo_list', 'todo_list')
   })
 
   window.router.beforeNavigation(hash => {
     return new Promise((resolve, reject) => {
-      $.ajax({
-        type: 'GET',
-        url: '/api/session'
-      }).done(data => {
-        if (data === 'OK') {
-          resolve(hash)
-        }
-        else {
-          resolve('login')
-        }
-      }).error(() => {
-        reject(new Error('ERROR'))
-      })
+      if (hash === '') {
+        resolve(hash);
+      }
+      else {
+        $.ajax({
+          type: 'GET',
+          url: '/api/session'
+        }).done(data => {
+          if (data === 'OK') {
+            resolve(hash)
+          }
+          else {
+            resolve('login')
+          }
+        }).error(() => {
+          reject(new Error('ERROR'))
+        })
+      }
     })
   })
 

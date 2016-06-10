@@ -103,7 +103,7 @@ class TodoList extends Cape.Component {
       type: 'DELETE',
       success: data => {
         if (data === 'OK') {
-          window.router.redirectTo('login');
+          window.router.redirectTo('');
         }
         else {
           self.refresh();
