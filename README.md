@@ -48,3 +48,10 @@ with the following command:
 ```
 $ bin/rails s -b 0.0.0.0
 ```
+
+## Default account credentials
+
+You can login to this application using the following credentials:
+
+    User name: alice
+    Password: hotyoga
