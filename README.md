@@ -15,7 +15,6 @@ In order to run this demo application, you need following softwares and librarie
 * [Ruby](https://www.ruby-lang.org/en/) 2.0 or higher
 * [Bundler](http://bundler.io/)
 * [Node.js](https://nodejs.org/) or [io.js](https://iojs.org/en/index.html)
-* [Bower](http://bower.io/)
 
 ## Installation of this demo application
 
@@ -23,7 +22,7 @@ In order to run this demo application, you need following softwares and librarie
 $ git clone https://github.com/oiax/capejs-demo-on-rails.git
 $ cd capejs-demo-on-rails
 $ bundle
-$ bower install
+$ npm install
 $ bin/rake db:setup
 ```
 
