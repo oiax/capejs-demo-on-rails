@@ -14,8 +14,8 @@ gem 'sdoc', group: :doc
 gem 'mini_auth'
 
 # ECMAScript 6
-gem 'sprockets', '~> 3.3.0'
-gem 'sprockets-es6', '~> 0.7.0'
+gem 'sprockets', '~> 3.6.0'
+gem 'sprockets-es6', '~> 0.9.0'
 
 group :development, :test do
   gem 'byebug'
