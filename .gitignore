@@ -16,6 +16,5 @@
 !/log/.keep
 /tmp
 
-# Ignore files managed by Bower
-/vendor/assets/components
-
+# Ignore files managed by npm
+/node_modules

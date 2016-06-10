@@ -1,9 +1,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap
+//= require bootstrap/dist/js/bootstrap
 //= require lodash/lodash
-//= require es6-promise
-//= require fetch
-//= require capejs
+//= require es6-promise/dist/es6-promise
+//= require fetch/lib/fetch
+//= require capejs/dist/cape
 //= require_tree .
