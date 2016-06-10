@@ -6,12 +6,11 @@ class TodoList extends Cape.Component {
   }
 
   render(m) {
+    this.renderLogoutModal(m);
     m.div({ class: 'row text-right'}, m => {
       m.div({ class: 'col-xs-12'}, m => {
-        m.btn('Logout', {
-          class: 'btn btn-default btn-flat',
-          onclick: e => this.logout()
-        });
+        m.data({ toggle: 'modal', target: '#logoutModal'})
+        m.btn('Logout', { class: 'btn btn-default btn-flat' });
       });
     });
     m.ul(m => {
@@ -21,6 +20,25 @@ class TodoList extends Cape.Component {
     });
     if (this.editingTask) this.renderUpdateForm(m);
     else this.renderCreateForm(m);
+  }
+
+  renderLogoutModal(m) {
+    m.div({ class: 'modal fade', id: 'logoutModal' }, m => {
+      m.div({ class: 'modal-dialog'}, m => {
+        m.div({ class: 'modal-content' }, m => {
+          m.div({ class: 'modal-body'}, m => {
+            m.p('Are you sure to logout?');
+
+            m.data({ dismiss: 'modal' })
+              .btn('Cancel', { class: 'btn btn-default'});
+
+            m.data({ dismiss: 'modal' })
+              .onclick(e => this.logout())
+              .btn('OK', { class: 'btn btn-primary'});
+          })
+        })
+      })
+    })
   }
 
   renderTask(m, task, index) {
