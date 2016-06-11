@@ -1,4 +1,5 @@
 var TaskCollectionAgent = require('../agents/task_collection_agent.es6');
+var SessionAgent = require('../agents/session_agent.es6');
 
 class TodoList extends Cape.Component {
   init() {
@@ -118,18 +119,15 @@ class TodoList extends Cape.Component {
   }
 
   logout() {
-    $.ajax({
-      url: '/api/session',
-      type: 'DELETE',
-      success: data => {
-        if (data === 'OK') {
-          window.router.redirectTo('');
-        }
-        else {
-          self.refresh();
-        }
+    var sessionAgent = new SessionAgent(this);
+    sessionAgent.destroy(data => {
+      if (data === 'OK') {
+        window.router.redirectTo('');
       }
-    });
+      else {
+        this.refresh();
+      }
+    })
   }
 }
 

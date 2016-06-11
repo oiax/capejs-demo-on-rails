@@ -8,8 +8,9 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:name])
-    if user && user.authenticate(params[:password])
+    credentials = params[:user] || {}
+    user = User.find_by(name: credentials[:name])
+    if user && user.authenticate(credentials[:password])
       session[:user_id] = user.id
       render text: 'OK'
     else

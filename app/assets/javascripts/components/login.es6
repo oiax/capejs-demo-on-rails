@@ -1,6 +1,13 @@
+var SessionAgent = require('../agents/session_agent.es6');
+
 class Login extends Cape.Component {
+  init() {
+    this.agent = new SessionAgent(this, { formName: 'user', paramName: 'user' });
+    this.refresh();
+  }
+
   render(m) {
-    m.form({ onsubmit: e => this.login() }, m => {
+    m.formFor('user', { onsubmit: e => this.login() }, m => {
       m.fieldset({ class: 'form-group'}, m => {
         m.labelFor('name', 'User name').sp().textField('name');
       });
@@ -23,14 +30,14 @@ class Login extends Cape.Component {
   }
 
   login() {
-    $.post('/api/session', this.formData(), data => {
+    this.agent.create(data => {
       if (data === 'OK') {
         window.router.redirectTo('todo_list');
       }
       else {
         this.refresh();
       }
-    });
+    })
   }
 }
 
