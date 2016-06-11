@@ -15,7 +15,7 @@ gem 'mini_auth'
 
 # ECMAScript 6
 gem 'sprockets', '~> 3.6.0'
-gem 'sprockets-es6', '~> 0.9.0'
+gem 'browserify-rails'
 
 group :development, :test do
   gem 'byebug'

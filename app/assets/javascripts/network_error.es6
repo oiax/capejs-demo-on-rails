@@ -3,3 +3,5 @@ class NetworkError extends Cape.Component {
     m.p('Network Error')
   }
 }
+
+module.exports = NetworkError;

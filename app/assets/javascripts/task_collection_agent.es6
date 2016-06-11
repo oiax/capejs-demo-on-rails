@@ -17,3 +17,5 @@ class TaskCollectionAgent extends Cape.CollectionAgent {
     this.update(task.id, { done: task.done ? 0 : 1 });
   }
 }
+
+module.exports = TaskCollectionAgent;

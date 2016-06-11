@@ -33,3 +33,5 @@ class Login extends Cape.Component {
     });
   }
 }
+
+module.exports = Login;

@@ -1,3 +1,5 @@
+var TaskCollectionAgent = require('./task_collection_agent.es6');
+
 class TodoList extends Cape.Component {
   init() {
     this.agent = new TaskCollectionAgent(this);
@@ -130,3 +132,5 @@ class TodoList extends Cape.Component {
     });
   }
 }
+
+module.exports = TodoList;

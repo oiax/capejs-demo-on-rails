@@ -9,3 +9,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+# Transform files with .es6 extension
+Rails.application.config.browserify_rails.commandline_options =
+  "-t [ babelify --presets [ es2015 ] --extensions .es6 ]"
