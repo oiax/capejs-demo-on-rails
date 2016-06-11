@@ -17,24 +17,23 @@ rc.Login = require('./components/login.es6');
 rc.TodoList = require('./components/todo_list.es6');
 
 var NetworkError = require('./components/network_error.es6');
+var SessionAgent = require('./agents/session_agent.es6');
 
 router.beforeNavigation(hash => {
-  return new Promise((resolve, reject) => {
+  return new Promise(function(resolve, reject) {
     if (hash === '') {
       resolve(hash);
     }
     else {
-      $.ajax({
-        type: 'GET',
-        url: '/api/session'
-      }).done(data => {
+      var agent = new SessionAgent(router);
+      agent.get('', {}, function(data) {
         if (data === 'OK') {
           resolve(hash)
         }
         else {
           resolve('login')
         }
-      }).error(() => {
+      }, function() {
         reject(new Error('ERROR'))
       })
     }
