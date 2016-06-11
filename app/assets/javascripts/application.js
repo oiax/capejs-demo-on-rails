@@ -12,11 +12,11 @@ Cape.defaultAgentAdapter = 'rails';
 
 window.router = require('./routes.es6');
 var rc = router.rootContainer;
-rc.Welcome = require('./welcome.es6');
-rc.Login = require('./login.es6');
-rc.TodoList = require('./todo_list.es6');
+rc.Welcome = require('./components/welcome.es6');
+rc.Login = require('./components/login.es6');
+rc.TodoList = require('./components/todo_list.es6');
 
-var NetworkError = require('./network_error.es6');
+var NetworkError = require('./components/network_error.es6');
 
 router.beforeNavigation(hash => {
   return new Promise((resolve, reject) => {

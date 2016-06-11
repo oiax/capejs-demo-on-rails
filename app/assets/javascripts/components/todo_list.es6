@@ -1,4 +1,4 @@
-var TaskCollectionAgent = require('./task_collection_agent.es6');
+var TaskCollectionAgent = require('../agents/task_collection_agent.es6');
 
 class TodoList extends Cape.Component {
   init() {
