@@ -1,22 +1,17 @@
 class TodoList extends Cape.Component {
   init() {
-    if (!window.router.signedIn) {
+    if (!window.router.vars.signedIn) {
       window.router.show(Login);
       return;
     }
+    this.toolBar = new ToolBar(this);
     this.agent = new TaskCollectionAgent(this);
     this.editingTask = null;
     this.agent.refresh();
   }
 
   render(m) {
-    this.renderLogoutModal(m);
-    m.div({ class: 'row text-right'}, m => {
-      m.div({ class: 'col-xs-12'}, m => {
-        m.data({ toggle: 'modal', target: '#logoutModal'})
-        m.btn('Logout', { class: 'btn btn-default btn-flat' });
-      });
-    });
+    this.toolBar.render(m);
     m.ul(m => {
       this.agent.objects.forEach((task, index) => {
         m.li(m => this.renderTask(m, task, index));
@@ -24,25 +19,6 @@ class TodoList extends Cape.Component {
     });
     if (this.editingTask) this.renderUpdateForm(m);
     else this.renderCreateForm(m);
-  }
-
-  renderLogoutModal(m) {
-    m.div({ class: 'modal fade', id: 'logoutModal' }, m => {
-      m.div({ class: 'modal-dialog'}, m => {
-        m.div({ class: 'modal-content' }, m => {
-          m.div({ class: 'modal-body'}, m => {
-            m.p('Are you sure to logout?');
-
-            m.data({ dismiss: 'modal' })
-              .btn('Cancel', { class: 'btn btn-default'});
-
-            m.data({ dismiss: 'modal' })
-              .onclick(e => this.logout())
-              .btn('OK', { class: 'btn btn-primary'});
-          })
-        })
-      })
-    })
   }
 
   renderTask(m, task, index) {
@@ -117,18 +93,5 @@ class TodoList extends Cape.Component {
     task.modifying = false;
     this.editingTask = null;
     this.agent.updateTask(task, this.val('task.title', ''));
-  }
-
-  logout() {
-    var sessionAgent = new SessionAgent(this);
-    sessionAgent.destroy(data => {
-      if (data === 'OK') {
-        window.router.vars.signedIn = false;
-        window.router.redirectTo('');
-      }
-      else {
-        this.refresh();
-      }
-    })
   }
 }
