@@ -1,11 +1,13 @@
 class Login extends Cape.Component {
   init() {
+    this.failed = false;
     this.agent = new SessionAgent(this, { formName: 'user', paramName: 'user' });
     this.refresh();
   }
 
   render(m) {
     m.formFor('user', { onsubmit: e => this.login() }, m => {
+      if (this.failed) this.renderErrorMessage(m);
       m.fieldset({ class: 'form-group'}, m => {
         m.labelFor('name', 'User name').sp().textField('name');
       });
@@ -27,6 +29,10 @@ class Login extends Cape.Component {
     });
   }
 
+  renderErrorMessage(m) {
+    m.div('Incorrect user name and/or password.', { class: 'alert alert-danger' })
+  }
+
   login() {
     this.agent.create(data => {
       if (data === 'OK') {
@@ -34,6 +40,7 @@ class Login extends Cape.Component {
         window.router.show(TodoList);
       }
       else {
+        this.failed = true;
         this.refresh();
       }
     })
