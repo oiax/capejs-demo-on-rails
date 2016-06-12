@@ -1,4 +1,6 @@
 class Api::TasksController < ApplicationController
+  before_action :authorize
+
   def index
     @tasks = Task.order(sort_order: :asc)
   end
@@ -39,6 +41,10 @@ class Api::TasksController < ApplicationController
   end
 
   private
+  def authorize
+    render text: 'Unauthorized', status: :unauthorized unless current_user
+  end
+
   def task_params
     params.require(:task).permit(:title, :done)
   end

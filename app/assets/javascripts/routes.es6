@@ -28,7 +28,7 @@ router.beforeNavigation(hash => {
 })
 
 router.errorHandler(function(err) {
-  router.show(NetworkError);
+  router.show(Errors.UnknownError);
 });
 
 $(document).ready(function() {

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "capejs": "^1.4.1",
+    "capejs": "git://github.com/oiax/capejs.git",
     "es6-promise": "^3.2.1",
     "whatwg-fetch": "^1.0.0"
   }

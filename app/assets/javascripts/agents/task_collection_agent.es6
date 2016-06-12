@@ -16,4 +16,19 @@ class TaskCollectionAgent extends Cape.CollectionAgent {
   toggleTask(task) {
     this.update(task.id, { done: task.done ? 0 : 1 });
   }
+
+  defaultErrorHandler(ex) {
+    if (ex.response.status === 401) {
+      window.router.redirectTo('login');
+    }
+    else if (ex.response.status === 403) {
+      window.router.show(Errors.Forbidden);
+    }
+    else if (ex.response.status === 404) {
+      window.router.show(Errors.NotFound);
+    }
+    else {
+      window.router.show(Errors.UnknownError);
+    }
+  }
 }
