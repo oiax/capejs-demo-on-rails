@@ -30,7 +30,7 @@ class Login extends Cape.Component {
   login() {
     this.agent.create(data => {
       if (data === 'OK') {
-        window.router.signedIn = true;
+        window.router.vars.signedIn = true;
         window.router.show(TodoList);
       }
       else {

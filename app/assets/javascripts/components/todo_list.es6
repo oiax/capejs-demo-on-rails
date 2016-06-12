@@ -123,7 +123,7 @@ class TodoList extends Cape.Component {
     var sessionAgent = new SessionAgent(this);
     sessionAgent.destroy(data => {
       if (data === 'OK') {
-        window.router.signedIn = false;
+        window.router.vars.signedIn = false;
         window.router.redirectTo('');
       }
       else {
