@@ -1,5 +1,9 @@
 class TodoList extends Cape.Component {
   init() {
+    if (!window.router.signedIn) {
+      window.router.show(Login);
+      return;
+    }
     this.agent = new TaskCollectionAgent(this);
     this.editingTask = null;
     this.agent.refresh();
@@ -119,6 +123,7 @@ class TodoList extends Cape.Component {
     var sessionAgent = new SessionAgent(this);
     sessionAgent.destroy(data => {
       if (data === 'OK') {
+        window.router.signedIn = false;
         window.router.redirectTo('');
       }
       else {

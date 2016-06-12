@@ -19,7 +19,7 @@ class TaskCollectionAgent extends Cape.CollectionAgent {
 
   defaultErrorHandler(ex) {
     if (ex.response.status === 401) {
-      window.router.redirectTo('login');
+      window.router.show(Login);
     }
     else if (ex.response.status === 403) {
       window.router.show(Errors.Forbidden);
