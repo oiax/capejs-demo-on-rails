@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
 gem 'sqlite3'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 2.7.0'
 gem 'coffee-rails', '~> 4.1.0'
 
@@ -13,9 +12,11 @@ gem 'sdoc', group: :doc
 
 gem 'mini_auth'
 
-# ECMAScript 6
-gem 'sprockets', '~> 3.6.0'
-gem 'browserify-rails'
+gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
+gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
+gem 'sprockets', github: 'rails/sprockets', branch: 'master'
+gem 'babel-transpiler'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug'

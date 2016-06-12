@@ -13,5 +13,3 @@ class Welcome extends Cape.Component {
     })
   }
 }
-
-module.exports = Welcome;

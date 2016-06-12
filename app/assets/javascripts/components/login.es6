@@ -1,5 +1,3 @@
-var SessionAgent = require('../agents/session_agent.es6');
-
 class Login extends Cape.Component {
   init() {
     this.agent = new SessionAgent(this, { formName: 'user', paramName: 'user' });
@@ -40,5 +38,3 @@ class Login extends Cape.Component {
     })
   }
 }
-
-module.exports = Login;

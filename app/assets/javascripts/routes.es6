@@ -6,4 +6,32 @@ router.draw(m => {
   m.page('todo_list')
 })
 
-module.exports = router;
+router.beforeNavigation(hash => {
+  return new Promise(function(resolve, reject) {
+    if (hash === '') {
+      resolve(hash);
+    }
+    else {
+      var agent = new SessionAgent(router);
+      agent.get('', {}, function(data) {
+        if (data === 'OK') {
+          resolve(hash)
+        }
+        else {
+          resolve('login')
+        }
+      }, function() {
+        reject(new Error('ERROR'))
+      })
+    }
+  })
+})
+
+router.errorHandler(function(err) {
+  router.show(NetworkError);
+});
+
+$(document).ready(function() {
+  router.mount('todo-list');
+  router.start();
+})

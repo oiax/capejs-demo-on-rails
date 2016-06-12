@@ -6,5 +6,3 @@ class SessionAgent extends Cape.ResourceAgent {
     this.singular = true;
   }
 }
-
-module.exports = SessionAgent;
