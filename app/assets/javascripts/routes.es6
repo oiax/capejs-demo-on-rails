@@ -1,4 +1,4 @@
-var router = new Cape.Router();
+window.router = new Cape.Router();
 
 router.draw(m => {
   m.root('welcome')
@@ -7,6 +7,13 @@ router.draw(m => {
 })
 
 $(document).ready(() => {
-  router.mount('todo-list');
-  router.start();
+  var agent = new SessionAgent();
+  agent.show(data => {
+    if (data === 'OK') window.router.vars.signedIn = true;
+    window.router.mount('todo-list');
+    window.router.start();
+  }, ex => {
+    var errorPage = new Errors.UnknownError();
+    errorPage.mount('todo-list');
+  })
 })
