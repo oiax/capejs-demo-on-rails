@@ -2,11 +2,11 @@ class Api::TasksController < ApplicationController
   before_action :authorize
 
   def index
-    @tasks = Task.order(sort_order: :asc)
+    @tasks = current_user.tasks.order(sort_order: :asc)
   end
 
   def create
-    if Task.create(task_params)
+    if current_user.tasks.create(task_params)
       render text: 'OK'
     else
       render text: 'NG'
@@ -14,7 +14,7 @@ class Api::TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     if task.update_attributes(task_params)
       render text: 'OK'
     else
@@ -23,19 +23,19 @@ class Api::TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.destroy
     render text: 'OK'
   end
 
   def move_up
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.move_up
     render text: 'OK'
   end
 
   def move_down
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.move_down
     render text: 'OK'
   end
