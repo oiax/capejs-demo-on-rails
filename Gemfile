@@ -13,9 +13,9 @@ gem 'sdoc', group: :doc
 gem 'mini_auth'
 
 gem 'capejs-rails', '~> 0.1.1'
-gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
-gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
-gem 'sprockets', github: 'rails/sprockets', branch: 'master'
+gem 'sass-rails', '~> 6.0.0.beta1'
+gem 'sprockets-rails', '~> 3.0.4'
+gem 'sprockets', '~> 4.0.0.beta2'
 gem 'babel-transpiler'
 gem 'font-awesome-rails'
 
