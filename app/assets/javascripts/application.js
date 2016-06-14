@@ -4,7 +4,7 @@
 //= require bootstrap/dist/js/bootstrap
 //= require es6-promise/dist/es6-promise
 //= require whatwg-fetch/fetch
-//= require capejs/dist/cape
+//= require cape
 //= require_tree .
 
 Cape.defaultAgentAdapter = 'rails';

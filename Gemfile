@@ -12,6 +12,7 @@ gem 'sdoc', group: :doc
 
 gem 'mini_auth'
 
+gem 'capejs-rails', '~> 0.1.0'
 gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
 gem 'sprockets', github: 'rails/sprockets', branch: 'master'
