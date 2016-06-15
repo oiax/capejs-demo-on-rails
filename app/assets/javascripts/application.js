@@ -6,5 +6,3 @@
 //= require whatwg-fetch/fetch
 //= require cape
 //= require_tree .
-
-Cape.defaultAgentAdapter = 'rails';

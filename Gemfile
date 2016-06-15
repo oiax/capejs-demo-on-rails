@@ -12,7 +12,7 @@ gem 'sdoc', group: :doc
 
 gem 'mini_auth'
 
-gem 'capejs-rails', '~> 0.1.1'
+gem 'capejs-rails', '~> 0.2.0'
 gem 'sass-rails', '~> 6.0.0.beta1'
 gem 'sprockets-rails', '~> 3.0.4'
 gem 'sprockets', '~> 4.0.0.beta2'
