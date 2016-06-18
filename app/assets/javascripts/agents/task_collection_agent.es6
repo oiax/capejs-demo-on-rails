@@ -1,6 +1,6 @@
 class TaskCollectionAgent extends Cape.CollectionAgent {
-  constructor(options) {
-    super(options);
+  constructor(client, options) {
+    super(client, options);
     this.resourceName = 'tasks';
     this.basePath = '/api/';
   }
