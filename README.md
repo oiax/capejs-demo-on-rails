@@ -1,11 +1,11 @@
 # Cape.JS DEMO on Rails
 
-![Cape.JS logo](https://cdn.rawgit.com/oiax/capejs/logo1/doc/logo/capejs.svg)
+![Cape.JS logo](https://cdn.rawgit.com/capejs/capejs/logo1/doc/logo/capejs.svg)
 
-This is a simple demo app for [Cape.JS](https://github.com/oiax/capejs) built
+This is a simple demo app for [Cape.JS](https://github.com/capejs/capejs) built
 on the [Ruby on Rails](http://rubyonrails.org/).
 
-Visit [Cape.JS Documentation](http://oiax.github.io/capejs/) to learn about Cape.JS in general.
+Visit [Cape.JS Documentation](http://capejs.github.io/capejs/) to learn about Cape.JS in general.
 
 ## Prerequisites
 
@@ -23,7 +23,6 @@ $ git clone https://github.com/oiax/capejs-demo-on-rails.git
 $ cd capejs-demo-on-rails
 $ bundle
 $ npm install
-$ cp config/skel/database.yml config/
 $ bin/rake db:setup
 ```
 
